@@ -42,7 +42,7 @@ final class AuthManager{
             
             guard result != nil, error == nil else {return}
             completion(.failure(AuthError.newUserCreation))
-
+            
             // we want to insert new user to the database we have seperate manager for database
             
             DatabaseManager.shared.createUser(newUser: newUser){success in
@@ -66,12 +66,18 @@ final class AuthManager{
                 }
             }
         }
-        
-        
-        }
+}
     
-    public func signOut(completion: @escaping (Bool)->Void){
-        
+    public func signOut(
+        completion: @escaping (Bool)->Void){
+            do {
+                try auth.signOut()
+                completion(true)
+            }
+            catch {
+                print(error)
+                completion(false)
+            }
     }
 }
 
