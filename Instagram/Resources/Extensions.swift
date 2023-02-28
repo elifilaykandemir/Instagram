@@ -28,3 +28,13 @@ extension UIView{
         frame.size.height
     }
 }
+
+//what is the purpose of this code
+//We are going to be convert into a dictionary
+extension Encodable {
+    func asDictionary()->[String:Any]?{
+        guard let data = try? JSONEncoder().encode(self) else {return nil} // self tell us about the User
+        let json = try? JSONSerialization.jsonObject(with: data,options: .allowFragments) as? [String:Any]
+        return json
+    }
+}

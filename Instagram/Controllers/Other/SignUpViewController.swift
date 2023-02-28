@@ -83,6 +83,8 @@ class SignUpViewController:  UIViewController, UITextFieldDelegate , UIImagePick
         return button
     }()
     
+    public var completion: (() -> Void)?
+    
     //MARK: -Lifecycle
     
     
@@ -180,9 +182,28 @@ class SignUpViewController:  UIViewController, UITextFieldDelegate , UIImagePick
                   presentError()
             return
         }
-        
+        let data = profilePictureView.image?.pngData()
         
         //SignUpwithAutManager
+        AuthManager.shared.signUp(
+            email: email,
+            username: username,
+            password: password,
+            profilePicture: data)
+        { [weak self] result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let user):
+                    UserDefaults.standard.setValue(user.email, forKey: "email")
+                    UserDefaults.standard.set(user.username, forKey: "username")
+                    self?.navigationController?.popToRootViewController(animated: true)
+                    self?.completion?()
+                case .failure(let error):
+                    print("\n\nSign Up Error: \(error)")
+                }
+            }
+           
+        }
     }
     
     private func presentError(){
