@@ -38,3 +38,11 @@ extension Encodable {
         return json
     }
 }
+
+extension Decodable{
+    init?(with dictionary: [String:Any] ){
+        guard let data = try? JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted) else {return nil}
+        guard let result = try? JSONDecoder().decode(Self.self, from: data) else {return nil}
+        self = result
+    }
+}
