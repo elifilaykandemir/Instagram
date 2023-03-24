@@ -21,6 +21,12 @@
 		FC0C2D1B29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2D1A29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift */; };
 		FC0C2D1D29B60B9C006B4790 /* PostDatetimeCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2D1C29B60B9C006B4790 /* PostDatetimeCollectionViewCellViewModel.swift */; };
 		FC0C2D1F29B60C5C006B4790 /* HomeFeedCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2D1E29B60C5C006B4790 /* HomeFeedCellTypes.swift */; };
+		FC323A0F29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A0E29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift */; };
+		FC323A1129CCFE160004C1A2 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1029CCFE160004C1A2 /* PostCollectionViewCell.swift */; };
+		FC323A1329CCFFD50004C1A2 /* PostActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1229CCFFD50004C1A2 /* PostActionCollectionViewCell.swift */; };
+		FC323A1529CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1429CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift */; };
+		FC323A1729CD00180004C1A2 /* PostCaptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1629CD00180004C1A2 /* PostCaptionCollectionViewCell.swift */; };
+		FC323A1929CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1829CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift */; };
 		FCBD2FCD298BE6AE008F5500 /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2FCC298BE6AE008F5500 /* ExplorerViewController.swift */; };
 		FCBD2FCF298BE6C3008F5500 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2FCE298BE6C3008F5500 /* CameraViewController.swift */; };
 		FCBD2FD1298BE6D3008F5500 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2FD0298BE6D3008F5500 /* NotificationViewController.swift */; };
@@ -66,6 +72,12 @@
 		FC0C2D1A29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCaptionCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC0C2D1C29B60B9C006B4790 /* PostDatetimeCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDatetimeCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC0C2D1E29B60C5C006B4790 /* HomeFeedCellTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedCellTypes.swift; sourceTree = "<group>"; };
+		FC323A0E29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC323A1029CCFE160004C1A2 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC323A1229CCFFD50004C1A2 /* PostActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostActionCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC323A1429CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikesCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC323A1629CD00180004C1A2 /* PostCaptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCaptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC323A1829CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDatetimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCBD2FCC298BE6AE008F5500 /* ExplorerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FCBD2FCE298BE6C3008F5500 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		FCBD2FD0298BE6D3008F5500 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +166,19 @@
 			path = Instagram;
 			sourceTree = "<group>";
 		};
+		FC323A0B29CC9C230004C1A2 /* Home Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FC323A0E29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift */,
+				FC323A1029CCFE160004C1A2 /* PostCollectionViewCell.swift */,
+				FC323A1229CCFFD50004C1A2 /* PostActionCollectionViewCell.swift */,
+				FC323A1429CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift */,
+				FC323A1629CD00180004C1A2 /* PostCaptionCollectionViewCell.swift */,
+				FC323A1829CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift */,
+			);
+			path = "Home Cells";
+			sourceTree = "<group>";
+		};
 		FCBD2FC5298AB0A0008F5500 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +191,7 @@
 		FCBD2FC6298AB0AC008F5500 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FC323A0B29CC9C230004C1A2 /* Home Cells */,
 				FC0ADF99292ED63500D85DC5 /* LaunchScreen.storyboard */,
 				FCE83EB92997E24200C358F3 /* SignInHeaderView.swift */,
 				FCE83EBD299A0F6C00C358F3 /* IGTextField.swift */,
@@ -365,10 +391,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCBD2FDF298BE7CE008F5500 /* CaptionViewController.swift in Sources */,
+				FC323A1529CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift in Sources */,
 				FCBD2FD7298BE74C008F5500 /* TabBarViewController.swift in Sources */,
 				FCBD2FED298BE87F008F5500 /* Notification.swift in Sources */,
 				FCBD2FE1298BE7F9008F5500 /* ListViewController.swift in Sources */,
 				FCBD2FF3298BE8C8008F5500 /* StorogeManager.swift in Sources */,
+				FC323A1129CCFE160004C1A2 /* PostCollectionViewCell.swift in Sources */,
 				FCBD2FE3298BE811008F5500 /* PostViewController.swift in Sources */,
 				FCBD2FEB298BE86A008F5500 /* Reletionship.swift in Sources */,
 				FC0C2D1B29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift in Sources */,
@@ -380,6 +408,7 @@
 				FCBD2FE7298BE84B008F5500 /* Users.swift in Sources */,
 				FC0C2D1D29B60B9C006B4790 /* PostDatetimeCollectionViewCellViewModel.swift in Sources */,
 				FCBD2FDD298BE79F008F5500 /* SignUpViewController.swift in Sources */,
+				FC323A1929CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift in Sources */,
 				FCE83EBA2997E24200C358F3 /* SignInHeaderView.swift in Sources */,
 				FC0ADF8F292ED63400D85DC5 /* AppDelegate.swift in Sources */,
 				FCE83EBE299A0F6C00C358F3 /* IGTextField.swift in Sources */,
@@ -387,6 +416,7 @@
 				FC0C2D1529B609E8006B4790 /* PostCollectionViewCellViewModel.swift in Sources */,
 				FC0C2D1929B60A91006B4790 /* PostLikesCollectionViewCellViewModel.swift in Sources */,
 				FCBD2FF1298BE8B5008F5500 /* DatabaseManager.swift in Sources */,
+				FC323A1329CCFFD50004C1A2 /* PostActionCollectionViewCell.swift in Sources */,
 				FCBD2FE5298BE824008F5500 /* SettingsViewController.swift in Sources */,
 				FCBD2FE9298BE858008F5500 /* Post.swift in Sources */,
 				FCBD2FEF298BE89A008F5500 /* AuthManager.swift in Sources */,
@@ -395,8 +425,10 @@
 				FCE83EBC2997EF9900C358F3 /* Extensions.swift in Sources */,
 				FCBD2FDB298BE775008F5500 /* SignInViewController.swift in Sources */,
 				FCBD2FF7298BE8F8008F5500 /* HapticsManager.swift in Sources */,
+				FC323A0F29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift in Sources */,
 				FC0ADF91292ED63400D85DC5 /* SceneDelegate.swift in Sources */,
 				FCBD2FCD298BE6AE008F5500 /* ExplorerViewController.swift in Sources */,
+				FC323A1729CD00180004C1A2 /* PostCaptionCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

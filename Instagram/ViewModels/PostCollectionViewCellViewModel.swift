@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostCollectionVireCellViewModel{
+struct PostCollectionViewCellViewModel{
     let postURL: URL
     
 }

@@ -34,12 +34,12 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
             .poster(
                 viewModel: PosterCollectionViewCellViewModel(
                 username: "iosacademy",
-                profilePictureURL: URL(string: "https://www.apple.com")!
+                profilePictureURL: URL(string: "https://iosacademy.io/assets/images/brand/icon.jpg")!
             )
         ),
             .post(
-                viewModel: PostCollectionVireCellViewModel(
-                    postURL:URL(string: "https://www.apple.com")!
+                viewModel: PostCollectionViewCellViewModel(
+                    postURL:URL(string: "https://iosacademy.io/assets/images/brand/icon.jpg")!
                 )
             ),
             .actions(viewModel: PostActionCollectionViewCellViewModel(isLiked: true)),
@@ -68,24 +68,70 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
         let cellType = viewModels[indexPath.section][indexPath.row]
         switch cellType{
         
-        case .poster(viewModel: let viewModel):
-            break
-        case .post(viewModel: let viewModel):
-            break
-        case .actions(viewModel: let viewModel):
-            break
-        case .likeCount(viewModel: let viewModel):
-            break
-        case .caption(viewModel: let viewModel):
-            break
-        case .timestamp(viewModel: let viewModel):
-            break
+        case .poster(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PosterCollectionViewCell.identifier,
+                for: indexPath
+            ) as? PosterCollectionViewCell else {
+                fatalError()
+                
+            }
+            cell.configure(with: viewModel)
+            return cell
+        case .post(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PostCollectionViewCell.identifier,
+                for: indexPath
+            )as? PostCollectionViewCell else {
+                fatalError()
+            }
+            cell.configure(with: viewModel)
+            cell.contentView.backgroundColor = colors[indexPath.row]
+            return cell
+        case .actions(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PostActionCollectionViewCell.identifier,
+                for: indexPath
+            )as? PostActionCollectionViewCell else {
+                fatalError()
+            }
+            cell.configure(with: viewModel)
+            cell.contentView.backgroundColor = colors[indexPath.row]
+            return cell
+        case .likeCount(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PostLikesCollectionViewCell.identifier,
+                for: indexPath
+            )as? PostLikesCollectionViewCell else {
+                fatalError()
+            }
+            cell.configure(with: viewModel)
+            cell.contentView.backgroundColor = colors[indexPath.row]
+            return cell
+        case .caption(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PostCaptionCollectionViewCell.identifier,
+                for: indexPath
+            ) as? PostCaptionCollectionViewCell else {
+                fatalError()
+                
+            }
+            cell.configure(with: viewModel)
+            cell.contentView.backgroundColor = colors[indexPath.row]
+            return cell
+        case .timestamp(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PostDatetimeCollectionViewCell.identifier,
+                for: indexPath
+            ) as? PostDatetimeCollectionViewCell else {
+                fatalError()
+                
+            }
+            cell.configure(with: viewModel)
+            cell.contentView.backgroundColor = colors[indexPath.row]
+            return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.contentView.backgroundColor = colors[indexPath.row]
         
-
-        return cell
     }
 
     
@@ -174,7 +220,12 @@ extension HomeViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.identifier)
+        collectionView.register(PostCollectionViewCell.self, forCellWithReuseIdentifier: PostCollectionViewCell.identifier)
+        collectionView.register(PostActionCollectionViewCell.self, forCellWithReuseIdentifier: PostActionCollectionViewCell.identifier)
+        collectionView.register(PostLikesCollectionViewCell.self, forCellWithReuseIdentifier: PostLikesCollectionViewCell.identifier)
+        collectionView.register(PostCaptionCollectionViewCell.self, forCellWithReuseIdentifier: PostCaptionCollectionViewCell.identifier)
+        collectionView.register(PostDatetimeCollectionViewCell.self, forCellWithReuseIdentifier: PostDatetimeCollectionViewCell.identifier)
         self.collectionView = collectionView
         
     }
