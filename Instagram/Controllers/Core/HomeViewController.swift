@@ -86,7 +86,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
                 fatalError()
                 
             }
-            cell.delegate? = self
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .post(let viewModel):
@@ -96,7 +96,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
             )as? PostCollectionViewCell else {
                 fatalError()
             }
-            cell.delegate? = self
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .actions(let viewModel):
@@ -106,7 +106,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
             )as? PostActionCollectionViewCell else {
                 fatalError()
             }
-            cell.delegate? = self
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .likeCount(let viewModel):
@@ -116,6 +116,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
             )as? PostLikesCollectionViewCell else {
                 fatalError()
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .caption(let viewModel):
@@ -126,6 +127,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
                 fatalError()
                 
             }
+            cell.delegate = self
             cell.configure(with: viewModel)
             return cell
         case .timestamp(let viewModel):
@@ -143,7 +145,21 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
     }
 
 }
+extension HomeViewController:PostCaptionCollectionViewCellDelegate{
+    func postCaptionCollectionViewCellDidTapCaption(_ cell: PostCaptionCollectionViewCell) {
+        print("tapped on caption")
+    }
+    
+    
+}
 
+extension HomeViewController:PostLikesCollectionViewCellDelegate{
+    func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell) {
+        print("tapped on likes")
+    }
+    
+    
+}
 extension HomeViewController:PostActionCollectionViewCellDelegate{
     func postActionCollectionViewCellDidTapLiked(_ cell: PostActionCollectionViewCell, isLiked: Bool) {
         // call DB To Update like state

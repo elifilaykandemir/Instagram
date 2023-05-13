@@ -82,9 +82,11 @@ class PostActionCollectionViewCell: UICollectionViewCell {
     @objc func didTapComment(){
       
         delegate?.postActionCollectionViewCellDidTapComment(self)
+        print("hellow orld")
     }
     @objc func didTapShare(){
         delegate?.postActionCollectionViewCellDidTapShare(self)
+        print("why why why")
     }
     
     override func layoutSubviews() {

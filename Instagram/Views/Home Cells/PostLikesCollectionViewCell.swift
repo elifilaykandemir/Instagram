@@ -7,12 +7,18 @@
 
 import UIKit
 
+protocol PostLikesCollectionViewCellDelegate:AnyObject{
+    func postLikesCollectionViewCellDidTapLikeCount(_ cell:PostLikesCollectionViewCell)
+}
 class PostLikesCollectionViewCell: UICollectionViewCell {
     static let identifier = "PostLikesCollectionViewCell"
+    
+    weak var delegate:PostLikesCollectionViewCellDelegate?
     
     private let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -21,6 +27,8 @@ class PostLikesCollectionViewCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         contentView.backgroundColor = .systemBackground
         contentView.addSubview(label)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapLikesLabel))
+        label.addGestureRecognizer(tap)
         
     }
                    
@@ -31,6 +39,10 @@ class PostLikesCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         label.frame = CGRect(x: 10, y: 0, width: contentView.width-12, height: contentView.height)
+    }
+    
+    @objc func didTapLikesLabel(){
+        delegate?.postLikesCollectionViewCellDidTapLikeCount(self)
     }
     
     override func prepareForReuse() {
