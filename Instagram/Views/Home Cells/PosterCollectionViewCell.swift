@@ -8,15 +8,25 @@
 import UIKit
 import SDWebImage
 
+protocol PosterCollectionViewCellDelegate: AnyObject{
+    func posterCollectionViewCellDidTapMore(_ cell:PosterCollectionViewCell)
+    
+    func posterCollectionViewCellDidTapUsername(_ cell:PosterCollectionViewCell)
+}
+
 final class PosterCollectionViewCell: UICollectionViewCell {
+    
     static let identifier = "PosterCollectionViewCell"
+    
+    weak var delegate: PosterCollectionViewCellDelegate?
+    
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
     }()
-        
+    
     private lazy var usernameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .regular)
@@ -38,16 +48,22 @@ final class PosterCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(usernameLabel)
         contentView.addSubview(moreButton)
-        moreButton.addTarget(self, action: #selector(didTapMore), for:  .touchUpInside)
+        moreButton.addTarget(self, action: #selector(didTapMore), for: .touchUpInside)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapUsername))
+        usernameLabel.isUserInteractionEnabled = true
+        usernameLabel.addGestureRecognizer(tap)
         
     }
                    
     required init?(coder: NSCoder) {
             fatalError()
         }
+    @objc func didTapUsername(){
+        delegate?.posterCollectionViewCellDidTapUsername(self)
+    }
     
     @objc func didTapMore(){
-        print("Button tapped")
+        delegate?.posterCollectionViewCellDidTapMore(self)
     }
     
     

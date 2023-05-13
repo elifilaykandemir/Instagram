@@ -51,6 +51,7 @@
 		FCE83EBA2997E24200C358F3 /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE83EB92997E24200C358F3 /* SignInHeaderView.swift */; };
 		FCE83EBC2997EF9900C358F3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE83EBB2997EF9900C358F3 /* Extensions.swift */; };
 		FCE83EBE299A0F6C00C358F3 /* IGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE83EBD299A0F6C00C358F3 /* IGTextField.swift */; };
+		FCF0B1752A0ABEDD00A8742F /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0B1742A0ABEDD00A8742F /* Label.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		FCE83EB92997E24200C358F3 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		FCE83EBB2997EF9900C358F3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FCE83EBD299A0F6C00C358F3 /* IGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextField.swift; sourceTree = "<group>"; };
+		FCF0B1742A0ABEDD00A8742F /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 				FC0ADF97292ED63500D85DC5 /* Assets.xcassets */,
 				FC0ADF8E292ED63400D85DC5 /* AppDelegate.swift */,
 				FCE83EBB2997EF9900C358F3 /* Extensions.swift */,
+				FCF0B1742A0ABEDD00A8742F /* Label.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				FC323A0F29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift in Sources */,
 				FC0ADF91292ED63400D85DC5 /* SceneDelegate.swift in Sources */,
 				FCBD2FCD298BE6AE008F5500 /* ExplorerViewController.swift in Sources */,
+				FCF0B1752A0ABEDD00A8742F /* Label.swift in Sources */,
 				FC323A1729CD00180004C1A2 /* PostCaptionCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -584,6 +588,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -613,6 +618,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
