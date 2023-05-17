@@ -6,24 +6,39 @@
 //
 
 import UIKit
+import AVFoundation
 
 class CameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .black
+        setUpNavBar()
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.tabBar.isHidden = true
+        
     }
-    */
-
+    
+    @objc func didTapClose(){
+        tabBarController?.selectedIndex = 0
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func setUpNavBar(){
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .close,
+            target: self,
+            action: #selector(didTapClose)
+        )
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(),for:.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.backgroundColor = .clear
+    }
+    
 }
