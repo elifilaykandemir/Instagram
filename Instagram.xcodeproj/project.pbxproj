@@ -21,6 +21,7 @@
 		FC0C2D1B29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2D1A29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift */; };
 		FC0C2D1D29B60B9C006B4790 /* PostDatetimeCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2D1C29B60B9C006B4790 /* PostDatetimeCollectionViewCellViewModel.swift */; };
 		FC0C2D1F29B60C5C006B4790 /* HomeFeedCellTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0C2D1E29B60C5C006B4790 /* HomeFeedCellTypes.swift */; };
+		FC0E29102A41CF89001834D4 /* PostEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0E290F2A41CF89001834D4 /* PostEditViewController.swift */; };
 		FC323A0F29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A0E29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift */; };
 		FC323A1129CCFE160004C1A2 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1029CCFE160004C1A2 /* PostCollectionViewCell.swift */; };
 		FC323A1329CCFFD50004C1A2 /* PostActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1229CCFFD50004C1A2 /* PostActionCollectionViewCell.swift */; };
@@ -73,6 +74,7 @@
 		FC0C2D1A29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCaptionCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC0C2D1C29B60B9C006B4790 /* PostDatetimeCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDatetimeCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		FC0C2D1E29B60C5C006B4790 /* HomeFeedCellTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedCellTypes.swift; sourceTree = "<group>"; };
+		FC0E290F2A41CF89001834D4 /* PostEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewController.swift; sourceTree = "<group>"; };
 		FC323A0E29CC9D0C0004C1A2 /* PosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC323A1029CCFE160004C1A2 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC323A1229CCFFD50004C1A2 /* PostActionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostActionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				FCBD2FE0298BE7F9008F5500 /* ListViewController.swift */,
 				FCBD2FE2298BE811008F5500 /* PostViewController.swift */,
 				FCBD2FE4298BE824008F5500 /* SettingsViewController.swift */,
+				FC0E290F2A41CF89001834D4 /* PostEditViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				FC0C2D1929B60A91006B4790 /* PostLikesCollectionViewCellViewModel.swift in Sources */,
 				FCBD2FF1298BE8B5008F5500 /* DatabaseManager.swift in Sources */,
 				FC323A1329CCFFD50004C1A2 /* PostActionCollectionViewCell.swift in Sources */,
+				FC0E29102A41CF89001834D4 /* PostEditViewController.swift in Sources */,
 				FCBD2FE5298BE824008F5500 /* SettingsViewController.swift in Sources */,
 				FCBD2FE9298BE858008F5500 /* Post.swift in Sources */,
 				FCBD2FEF298BE89A008F5500 /* AuthManager.swift in Sources */,
@@ -588,7 +592,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -618,7 +622,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

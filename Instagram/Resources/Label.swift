@@ -2,15 +2,12 @@
 //  Label.swift
 //  Instagram
 //
-//  Created by Elif İlay KANDEMİR on 9.05.2023.
-//
+//  Created by Elif İlay Eser
 
 import UIKit
 
 class Label : UILabel {
-    
-    
-    
+
     init(labelText : String? ,labelFontNamed:String="Times New Roman" ,labelFontSize:CGFloat=12,labelNumberOfLines:Int=1) {
         super.init(frame: CGRect.zero)
         text = labelText
@@ -23,11 +20,5 @@ class Label : UILabel {
           super.init(coder: aDecoder)
           
       }
-      
-//      private func common() {
-//          textAlignment = .center
-//          textColor = .white
-//          translatesAutoresizingMaskIntoConstraints = false
-//          numberOfLines = 0
-//      }
+
 }

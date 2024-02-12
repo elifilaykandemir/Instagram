@@ -2,7 +2,7 @@
 //  PostCollectionViewCell.swift
 //  Instagram
 //
-//  Created by Elif İlay KANDEMİR on 24.03.2023.
+//  Created by Elif İlay Eser
 //
 
 import UIKit

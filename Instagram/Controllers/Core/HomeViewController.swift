@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Instagram
 //
-//  Created by Elif İlay KANDEMİR on 24.11.2022.
+//  Created by Elif İlay Eser
 //
 
 import UIKit

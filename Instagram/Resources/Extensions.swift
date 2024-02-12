@@ -2,7 +2,7 @@
 //  Extensions.swift
 //  Instagram
 //
-//  Created by Elif İlay KANDEMİR on 11.02.2023.
+//  Created by Elif İlay Eser
 //
 
 import Foundation
