@@ -69,7 +69,7 @@ class CameraViewController: UIViewController {
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 guard granted else{
                     print("the user has not granted to access the camera")
-                    self.handleDismiss()
+                    return
                 }
                 DispatchQueue.main.async {
                     self?.setUpCamera()
@@ -77,7 +77,7 @@ class CameraViewController: UIViewController {
             }
         case .restricted, .denied:
             print("the user can't give camera access due to some restriction.")
-            self.handleDismiss()
+            
             break
         case .authorized:
             setUpCamera()
@@ -131,9 +131,6 @@ class CameraViewController: UIViewController {
             action: #selector(didTapClose)
         )
         
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(),for:.default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.backgroundColor = .clear
     }
     
 }
@@ -144,13 +141,21 @@ extension CameraViewController : AVCapturePhotoCaptureDelegate {
             return
         }
         captureSession?.stopRunning()
-        
-        let vc = PostEditViewController(image: image)
+        showEditPhoto(image: image)
+    }
+    private func showEditPhoto(image: UIImage) {
+        guard let resizedImage = image.sd_resizedImage(
+            with: CGSize(width: 640, height: 640),
+            scaleMode: .aspectFill
+        ) else {
+            return
+        }
+
+        let vc = PostEditViewController(image: resizedImage)
         if #available(iOS 14.0, *) {
             vc.navigationItem.backButtonDisplayMode = .minimal
-        } else {
-            vc.navigationItem.backButtonTitle = ""
         }
         navigationController?.pushViewController(vc, animated: false)
+
     }
 }

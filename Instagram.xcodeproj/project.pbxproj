@@ -28,6 +28,7 @@
 		FC323A1529CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1429CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift */; };
 		FC323A1729CD00180004C1A2 /* PostCaptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1629CD00180004C1A2 /* PostCaptionCollectionViewCell.swift */; };
 		FC323A1929CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC323A1829CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift */; };
+		FC9661EC2B7E9D18007EABB3 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9661EB2B7E9D18007EABB3 /* PhotoCollectionViewCell.swift */; };
 		FCBD2FCD298BE6AE008F5500 /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2FCC298BE6AE008F5500 /* ExplorerViewController.swift */; };
 		FCBD2FCF298BE6C3008F5500 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2FCE298BE6C3008F5500 /* CameraViewController.swift */; };
 		FCBD2FD1298BE6D3008F5500 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD2FD0298BE6D3008F5500 /* NotificationViewController.swift */; };
@@ -81,6 +82,7 @@
 		FC323A1429CCFFF40004C1A2 /* PostLikesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLikesCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC323A1629CD00180004C1A2 /* PostCaptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCaptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC323A1829CD004B0004C1A2 /* PostDatetimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDatetimeCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC9661EB2B7E9D18007EABB3 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCBD2FCC298BE6AE008F5500 /* ExplorerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FCBD2FCE298BE6C3008F5500 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		FCBD2FD0298BE6D3008F5500 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				FC0ADF99292ED63500D85DC5 /* LaunchScreen.storyboard */,
 				FCE83EB92997E24200C358F3 /* SignInHeaderView.swift */,
 				FCE83EBD299A0F6C00C358F3 /* IGTextField.swift */,
+				FC9661EB2B7E9D18007EABB3 /* PhotoCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				FCBD2FEB298BE86A008F5500 /* Reletionship.swift in Sources */,
 				FC0C2D1B29B60B24006B4790 /* PostCaptionCollectionViewCellViewModel.swift in Sources */,
 				FC0ADF93292ED63400D85DC5 /* HomeViewController.swift in Sources */,
+				FC9661EC2B7E9D18007EABB3 /* PhotoCollectionViewCell.swift in Sources */,
 				FCBD2FF5298BE8E0008F5500 /* AnalyticsManager.swift in Sources */,
 				FCBD2FCF298BE6C3008F5500 /* CameraViewController.swift in Sources */,
 				FCBD2FD1298BE6D3008F5500 /* NotificationViewController.swift in Sources */,
@@ -589,7 +593,6 @@
 				INFOPLIST_FILE = Instagram/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -619,7 +622,6 @@
 				INFOPLIST_FILE = Instagram/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;

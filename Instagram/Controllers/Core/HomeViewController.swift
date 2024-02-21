@@ -7,12 +7,12 @@
 
 import UIKit
 
-class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource{
+class HomeViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     
     private var collectionView: UICollectionView?
     private var viewModels = [[HomeFeedCellTypes]]()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Instagram"
@@ -29,41 +29,84 @@ class HomeViewController: UIViewController,UICollectionViewDelegate, UICollectio
     
     private func fetchPosts(){
         //mock data
+        guard let username = UserDefaults.standard.string(forKey: "username") else {return}
         
-        let postData : [HomeFeedCellTypes] = [
-            .poster(
-                viewModel: PosterCollectionViewCellViewModel(
-                                                username: "iosacademy",
-                                                profilePictureURL: URL(string: "https://iosacademy.io/assets/images/brand/icon.jpg")!
-                )
-        ),
-            .post(
-                viewModel: PostCollectionViewCellViewModel(
-                                                postURL:URL(string: "https://iosacademy.io/assets/images/brand/icon.jpg")!
-                )
-            ),
-            .actions(
-                viewModel: PostActionCollectionViewCellViewModel(
-                                                isLiked: true)
-            ),
-            .likeCount(
-                viewModel:PostLikesCollectionViewCellViewModel(
-                                                likers:  ["kanyewest"])
-            ),
-            .caption(
-                viewModel: PostCaptionCollectionViewCellViewModel(
-                                                username: "iosacademy",
-                                                caption: "This is an awesome first post")
-            ),
-            .timestamp(
-                viewModel: PostDatetimeCollectionViewCellViewModel(
-                                                date: Date()
-                )
-            )
-        ]
-        viewModels.append(postData)
-        collectionView?.reloadData()
+        DatabaseManager.shared.posts(for: username) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let posts):
+                    let group = DispatchGroup()
+                    
+                    posts.forEach { model in
+                        group.enter()
+                        self?.createViewModel(model: model, username: username, completion: { success in
+                            defer{
+                                group.leave()
+                            }
+                            if !success{
+                                print(" failed")
+                            }
+                        }
+                        )
+                    }
+                    group.notify(queue: .main){
+                        self?.collectionView?.reloadData()
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+                    
+                }
+            }
+            
+        }
     }
+    private func createViewModel(model: Post,
+                                 username: String,
+                                 completion: @escaping (Bool) -> Void){
+
+        StorageManager.shared.profilePictureURL(for: username) { [weak self] profilePictureURL in
+            guard let postURL = URL(string: model.postURLString),
+                  let profilePictureURL = profilePictureURL else {
+                return
+            }
+            
+            let postData : [HomeFeedCellTypes] = [
+                .poster(
+                    viewModel: PosterCollectionViewCellViewModel(
+                        username: username,
+                        profilePictureURL: profilePictureURL
+                    )
+                ),
+                .post(
+                    viewModel: PostCollectionViewCellViewModel(
+                        postURL:postURL
+                    )
+                ),
+                .actions(
+                    viewModel: PostActionCollectionViewCellViewModel(
+                        isLiked: true)
+                ),
+                .likeCount(
+                    viewModel:PostLikesCollectionViewCellViewModel(
+                        likers:  ["kanyewest"])
+                ),
+                .caption(
+                    viewModel: PostCaptionCollectionViewCellViewModel(
+                        username: username,
+                        caption: model.caption)
+                ),
+                .timestamp(
+                    viewModel: PostDatetimeCollectionViewCellViewModel(
+                        date: DateFormatter.formatter.date(from: model.postedDate) ?? Date()
+                    )
+                )
+            ]
+            self?.viewModels.append(postData)
+            completion(true)
+        }
+    }
+    
 
     //CollectionView
 
