@@ -16,6 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        ///Dummy notification for the account
+        ///Add dummy notification for current user
+        let id = NotificationsManager.newIdentifier()
+        let model = IGNotification(
+            identifer: id,
+            notificationType: 2,
+            profilePictureUrl: "https://iosacademy.io/assets/images/brand/icon.jpg",
+            username: "elanmusk",
+            dateString: String.date(from: Date()) ?? "Now",
+            isFollowing: false,
+            postId: "123",
+            postUrl:"https://iosacademy.io/assets/images/courses/swiftui.png"
+        )
+        NotificationsManager.shared.create(notification: model, for: "kanyewest")
+        
         return true
     }
 

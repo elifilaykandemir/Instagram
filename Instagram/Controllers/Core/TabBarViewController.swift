@@ -23,7 +23,7 @@ class TabBarViewController: UITabBarController {
                                email: email)
         let home = HomeViewController()
         let camera = CameraViewController()
-        let explorer = ExplorerViewController()
+        let explorer = ExploreViewController()
         let activity = NotificationViewController()
         let profile = ProfileViewController(user:currentUser)
         
