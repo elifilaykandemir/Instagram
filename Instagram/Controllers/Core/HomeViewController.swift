@@ -141,6 +141,7 @@ class HomeViewController: UIViewController,UICollectionViewDelegate,UICollection
     private func createViewModel(model: Post,
                                  username: String,
                                  completion: @escaping (Bool) -> Void){
+        
         guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
         StorageManager.shared.profilePictureURL(for: username) { [weak self] profilePictureURL in
             guard let postURL = URL(string: model.postURLString),
@@ -478,10 +479,22 @@ extension HomeViewController {
             
         //Section
         let section = NSCollectionLayoutSection(group: group)
-        
-            section.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 0, bottom: 3, trailing: 0)
-            
-        return section
+            if index == 0 {
+                section.boundarySupplementaryItems = [
+                    NSCollectionLayoutBoundarySupplementaryItem(
+                        layoutSize: NSCollectionLayoutSize(
+                            widthDimension: .fractionalWidth(1),
+                            heightDimension: .fractionalWidth(0.3)
+                        ),
+                        elementKind: UICollectionView.elementKindSectionHeader,
+                        alignment: .top
+                    )
+                ]
+            }
+
+            section.contentInsets = NSDirectionalEdgeInsets(top: 3, leading: 0, bottom: 10, trailing: 0)
+
+            return section
         
         
         })

@@ -12,7 +12,9 @@ protocol PostLikesCollectionViewCellDelegate: AnyObject {
 }
 class PostLikesCollectionViewCell: UICollectionViewCell {
     static let identifier = "PostLikesCollectionViewCell"
+    
     private var index = 0
+    
     weak var delegate:PostLikesCollectionViewCellDelegate?
     
     private let label: UILabel = {

@@ -60,6 +60,7 @@ final class DatabaseManager{
             return
         }
         let reference = database.document("user/\(username)/posts/\(newPost.id)")
+        print("user/\(username)/posts/\(newPost.id)")
         guard let data = newPost.asDictionary()else {
             completion(false)
             return
@@ -123,10 +124,7 @@ final class DatabaseManager{
             }
         }
     }
-    /// Find user with username
-    /// - Parameters:
-    ///   - username: Source username
-    ///   - completion: Result callback
+
     public func findUser(username: String, completion: @escaping (User?) -> Void) {
         let ref = database.collection("user")
         ref.getDocuments { snapshot, error in
@@ -198,17 +196,14 @@ final class DatabaseManager{
             completion(Post(with: data))
         }
     }
-    /// Follow states that are supported
+
+    
     enum RelationshipState {
         case follow
         case unfollow
     }
 
-    /// Update relationship of follow for user
-    /// - Parameters:
-    ///   - state: State to update to
-    ///   - targetUsername: Other user username
-    ///   - completion: Result callback
+
     public func updateRelationship(
         state: RelationshipState,
         for targetUsername: String,
@@ -244,10 +239,7 @@ final class DatabaseManager{
             completion(true)
         }
     }
-    /// Get user counts for target usre
-    /// - Parameters:
-    ///   - username: Username to query
-    ///   - completion: Callback
+ 
     public func getUserCounts(
         username: String,
         completion: @escaping ((followers: Int, following: Int, posts: Int)) -> Void
@@ -335,10 +327,7 @@ final class DatabaseManager{
         }
     }
 
-    /// Get followers for user
-    /// - Parameters:
-    ///   - username: Username to query
-    ///   - completion: Result callback
+    
     public func followers(for username: String, completion: @escaping ([String]) -> Void) {
         let ref = database.collection("user")
             .document(username)
@@ -352,10 +341,6 @@ final class DatabaseManager{
         }
     }
 
-    /// Get users that parameter username follows
-    /// - Parameters:
-    ///   - username: Query usernam
-    ///   - completion: Result callback
     public func following(for username: String, completion: @escaping ([String]) -> Void) {
         let ref = database.collection("user")
             .document(username)
@@ -371,10 +356,6 @@ final class DatabaseManager{
 
     // MARK: - User Info
 
-    /// Get user info
-    /// - Parameters:
-    ///   - username: username to query for
-    ///   - completion: Result callback
     public func getUserInfo(
         username: String,
         completion: @escaping (UserInfo?) -> Void
@@ -393,10 +374,7 @@ final class DatabaseManager{
         }
     }
 
-    /// Set user info
-    /// - Parameters:
-    ///   - userInfo: UserInfo model
-    ///   - completion: Callback
+ 
     public func setUserInfo(
         userInfo: UserInfo,
         completion: @escaping (Bool) -> Void
@@ -416,13 +394,7 @@ final class DatabaseManager{
     }
 
     // MARK: - Comment
-
-    /// Create a comment
-    /// - Parameters:
-    ///   - comment: Comment mmodel
-    ///   - postID: post id
-    ///   - owner: username who owns post
-    ///   - completion: Result callback
+    
     public func createComments(
         comment: Comment,
         postID: String,
@@ -442,11 +414,6 @@ final class DatabaseManager{
         }
     }
 
-    /// Get comments for given post
-    /// - Parameters:
-    ///   - postID: Post id to query
-    ///   - owner: Username who owns post
-    ///   - completion: Result callback
     public func getComments(
         postID: String,
         owner: String,
@@ -472,18 +439,11 @@ final class DatabaseManager{
 
     // MARK: - Liking
 
-    /// Like states that are supported
     enum LikeState {
         case like
         case unlike
     }
 
-    /// Update like state on post
-    /// - Parameters:
-    ///   - state: State to update to
-    ///   - postID: Post to update for
-    ///   - owner: Owner username of post
-    ///   - completion: Result callback
     public func updateLikeState(
         state: LikeState,
         postID: String,
