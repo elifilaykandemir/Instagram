@@ -73,7 +73,8 @@ class CaptionViewController: UIViewController {
         }
         
         // Generate post ID
-        guard let newPostID = createNewPostID(), let stringDate = String.date(from: Date()) else {
+        guard let newPostID = createNewPostID(),
+              let stringDate = String.date(from: Date()) else {
             return
         }
         
@@ -106,7 +107,7 @@ class CaptionViewController: UIViewController {
                     self?.tabBarController?.selectedIndex = 0
                     self?.navigationController?.popToRootViewController(animated: false)
                     
-                    //NotificationCenter.default.post(name: .didPostNotification, object: nil)
+                    NotificationCenter.default.post(name: .didPostNotification, object: nil)
                 }
                 }
             }

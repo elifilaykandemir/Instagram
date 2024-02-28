@@ -83,7 +83,7 @@ class ExploreViewController: UIViewController, UISearchResultsUpdating {
         return collectionView
     }()
     
-    private var posts = [Post]()
+    private var posts = [(post: Post, user: User)]()
     //MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -141,14 +141,14 @@ extension ExploreViewController: SearchResultsViewControllerDelegate, UICollecti
             fatalError()
         }
         let model = posts[indexPath.row]
-        cell.configure(with: URL(string: model.postURLString))
+        cell.configure(with: URL(string: model.post.postURLString))
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-//        let model = posts[indexPath.row]
-//        let vc = PostViewController(post: post)
-//        navigationController?.pushViewController(vc, animated: true)
+        let model = posts[indexPath.row]
+        let vc = PostViewController(post: model.post, owner: model.user.username)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func searchResultsViewController(_ vc: SearchResultViewController, didSelectResultWith user: User) {

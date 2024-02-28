@@ -24,6 +24,13 @@ class CameraViewController: UIViewController {
         button.backgroundColor = nil
         return button
     }()
+    private let photoPickerButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = .label
+        button.setImage(UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
+                        for: .normal)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +38,11 @@ class CameraViewController: UIViewController {
         title = "Take Photo"
         view.addSubview(cameraView)
         view.addSubview(shutterButton)
+        view.addSubview(photoPickerButton)
         setUpNavBar()
         checkCameraPermission()
         shutterButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
+        photoPickerButton.addTarget(self, action: #selector(didTapPickPhoto), for: .touchUpInside)
         
     }
     
@@ -59,6 +68,11 @@ class CameraViewController: UIViewController {
         let buttonSize: CGFloat = view.width/5
         shutterButton.frame = CGRect(x:(view.width - buttonSize)/2 , y: view.safeAreaInsets.top + view.width + 100, width: buttonSize, height: buttonSize)
         shutterButton.layer.cornerRadius = buttonSize/2
+        
+        photoPickerButton.frame = CGRect(x: (shutterButton.left - (buttonSize/1.5))/2,
+                                         y: shutterButton.top + ((buttonSize/1.5)/2),
+                                         width: buttonSize/1.5,
+                                         height: buttonSize/1.5)
 
     }
     
@@ -109,9 +123,9 @@ class CameraViewController: UIViewController {
     
             cameraView.layer.addSublayer(previewLayer)
             
-            DispatchQueue.global(qos: .userInitiated).async {
-                captureSession.startRunning()
-            }
+            
+            captureSession.startRunning()
+            
         }
     }
     @objc func didTapClose(){
@@ -121,6 +135,13 @@ class CameraViewController: UIViewController {
     
     @objc func didTapTakePhoto(){
         cameraOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+    }
+    @objc func didTapPickPhoto() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
     }
     
     
@@ -134,6 +155,19 @@ class CameraViewController: UIViewController {
     }
     
 }
+extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        showEditPhoto(image: image)
+    }
+}
 
 extension CameraViewController : AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?){
@@ -143,6 +177,7 @@ extension CameraViewController : AVCapturePhotoCaptureDelegate {
         captureSession?.stopRunning()
         showEditPhoto(image: image)
     }
+    
     private func showEditPhoto(image: UIImage) {
         guard let resizedImage = image.sd_resizedImage(
             with: CGSize(width: 640, height: 640),

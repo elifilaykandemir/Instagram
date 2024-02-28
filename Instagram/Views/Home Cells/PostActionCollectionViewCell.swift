@@ -8,15 +8,17 @@
 import UIKit
 
 protocol PostActionCollectionViewCellDelegate : AnyObject {
-    func postActionCollectionViewCellDidTapLiked(_ cell:PostActionCollectionViewCell, isLiked:Bool)
-    func postActionCollectionViewCellDidTapComment(_ cell:PostActionCollectionViewCell)
-    func postActionCollectionViewCellDidTapShare(_ cell:PostActionCollectionViewCell)
+    func postActionsCollectionViewCellDidTapLike(_ cell: PostActionCollectionViewCell, isLiked: Bool, index: Int)
+    func postActionsCollectionViewCellDidTapComment(_ cell: PostActionCollectionViewCell, index: Int)
+    func postActionsCollectionViewCellDidTapShare(_ cell: PostActionCollectionViewCell, index: Int)
 }
 
 class PostActionCollectionViewCell: UICollectionViewCell {
     static let identifier = "PostActionCollectionViewCell"
     
     weak var delegate: PostActionCollectionViewCellDelegate?
+    private var index = 0
+
     
     private var isLiked = false
     
@@ -76,16 +78,18 @@ class PostActionCollectionViewCell: UICollectionViewCell {
             likeButton.setImage(image, for: .normal)
             likeButton.tintColor = .systemRed
         }
-        delegate?.postActionCollectionViewCellDidTapLiked(self, isLiked: !isLiked)
+        delegate?.postActionsCollectionViewCellDidTapLike(self,
+                                                          isLiked: !isLiked,
+                                                          index: index)
         self.isLiked = !isLiked
     }
     @objc func didTapComment(){
       
-        delegate?.postActionCollectionViewCellDidTapComment(self)
+        delegate?.postActionsCollectionViewCellDidTapComment(self, index: index)
         
     }
     @objc func didTapShare(){
-        delegate?.postActionCollectionViewCellDidTapShare(self)
+        delegate?.postActionsCollectionViewCellDidTapShare(self, index: index)
        
     }
     
@@ -102,9 +106,10 @@ class PostActionCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
     }
     
-    func configure(with viewModel: PostActionCollectionViewCellViewModel){
+    func configure(with viewModel: PostActionCollectionViewCellViewModel,
+                   index: Int){
+        self.index = index
         self.isLiked = viewModel.isLiked
-        
         if viewModel.isLiked{
             let image = UIImage(systemName: "suit.heart.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 24))
             likeButton.setImage(image, for: .normal)

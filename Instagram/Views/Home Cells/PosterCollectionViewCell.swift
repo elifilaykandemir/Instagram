@@ -9,15 +9,14 @@ import UIKit
 import SDWebImage
 
 protocol PosterCollectionViewCellDelegate: AnyObject{
-    func posterCollectionViewCellDidTapMore(_ cell:PosterCollectionViewCell)
-    
-    func posterCollectionViewCellDidTapUsername(_ cell:PosterCollectionViewCell)
+    func posterCollectionViewCellDidTapMore(_ cell: PosterCollectionViewCell, index: Int)
+    func posterCollectionViewCellDidTapUsername(_ cell: PosterCollectionViewCell, index: Int)
 }
 
 final class PosterCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "PosterCollectionViewCell"
-    
+    private var index = 0
     weak var delegate: PosterCollectionViewCellDelegate?
     
     private lazy var imageView: UIImageView = {
@@ -58,12 +57,12 @@ final class PosterCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
             fatalError()
         }
-    @objc func didTapUsername(){
-        delegate?.posterCollectionViewCellDidTapUsername(self)
+    @objc func didTapUsername() {
+        delegate?.posterCollectionViewCellDidTapUsername(self, index: index)
     }
-    
-    @objc func didTapMore(){
-        delegate?.posterCollectionViewCellDidTapMore(self)
+
+    @objc func didTapMore() {
+        delegate?.posterCollectionViewCellDidTapMore(self, index: index)
     }
     
     
@@ -88,7 +87,8 @@ final class PosterCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
     }
     
-    func configure(with viewModel: PosterCollectionViewCellViewModel){
+    func configure(with viewModel: PosterCollectionViewCellViewModel, index: Int){
+        self.index = index
         usernameLabel.text = viewModel.username
         imageView.sd_setImage(with: viewModel.profilePictureURL,completed:nil)
         

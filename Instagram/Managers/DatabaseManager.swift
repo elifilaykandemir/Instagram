@@ -82,7 +82,7 @@ final class DatabaseManager{
             completion(error==nil)
         }
     }
-    public func explorePosts(completion: @escaping ([Post]) -> Void) {
+    public func explorePosts(completion: @escaping ([(post: Post, user: User)]) -> Void) {
         let ref = database.collection("user")
         ref.getDocuments { snapshot, error in
             guard let users = snapshot?.documents.compactMap({ User(with: $0.data()) }),
@@ -92,7 +92,7 @@ final class DatabaseManager{
             }
 
             let group = DispatchGroup()
-            var aggregatePosts = [Post]()
+            var aggregatePosts = [(post: Post, user: User)]()
 
             users.forEach { user in
                 group.enter()
@@ -111,13 +111,15 @@ final class DatabaseManager{
                         return
                     }
 
-                    aggregatePosts.append(contentsOf: posts)
-                    
+                    aggregatePosts.append(contentsOf: posts.compactMap({
+                        (post: $0, user: user)
+                    }))
                 }
             }
 
             group.notify(queue: .main) {
                 completion(aggregatePosts)
+                
             }
         }
     }
@@ -240,6 +242,281 @@ final class DatabaseManager{
             targetUserFollowers.document(currentUsername).setData(["valid": "1"])
 
             completion(true)
+        }
+    }
+    /// Get user counts for target usre
+    /// - Parameters:
+    ///   - username: Username to query
+    ///   - completion: Callback
+    public func getUserCounts(
+        username: String,
+        completion: @escaping ((followers: Int, following: Int, posts: Int)) -> Void
+    ) {
+        let userRef = database.collection("user")
+            .document(username)
+
+        var followers = 0
+        var following = 0
+        var posts = 0
+
+        let group = DispatchGroup()
+        group.enter()
+        group.enter()
+        group.enter()
+
+        userRef.collection("posts").getDocuments { snapshot, error in
+            defer {
+                group.leave()
+            }
+
+            guard let count = snapshot?.documents.count, error == nil else {
+                return
+            }
+            posts = count
+        }
+
+        userRef.collection("followers").getDocuments { snapshot, error in
+            defer {
+                group.leave()
+            }
+
+            guard let count = snapshot?.documents.count, error == nil else {
+                return
+            }
+            followers = count
+        }
+
+        userRef.collection("following").getDocuments { snapshot, error in
+            defer {
+                group.leave()
+            }
+
+            guard let count = snapshot?.documents.count, error == nil else {
+                return
+            }
+            following = count
+        }
+
+        group.notify(queue: .global()) {
+            let result = (
+                followers: followers,
+                following: following,
+                posts: posts
+            )
+            completion(result)
+        }
+    }
+
+    /// Check if current user is following another
+    /// - Parameters:
+    ///   - targetUsername: Other user to check
+    ///   - completion: Result callback
+    public func isFollowing(
+        targetUsername: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else {
+            completion(false)
+            return
+        }
+
+        let ref = database.collection("user")
+            .document(targetUsername)
+            .collection("followers")
+            .document(currentUsername)
+        ref.getDocument { snapshot, error in
+            guard snapshot?.data() != nil, error == nil else {
+                // Not following
+                completion(false)
+                return
+            }
+            // following
+            completion(true)
+        }
+    }
+
+    /// Get followers for user
+    /// - Parameters:
+    ///   - username: Username to query
+    ///   - completion: Result callback
+    public func followers(for username: String, completion: @escaping ([String]) -> Void) {
+        let ref = database.collection("user")
+            .document(username)
+            .collection("followers")
+        ref.getDocuments { snapshot, error in
+            guard let usernames = snapshot?.documents.compactMap({ $0.documentID }), error == nil else {
+                completion([])
+                return
+            }
+            completion(usernames)
+        }
+    }
+
+    /// Get users that parameter username follows
+    /// - Parameters:
+    ///   - username: Query usernam
+    ///   - completion: Result callback
+    public func following(for username: String, completion: @escaping ([String]) -> Void) {
+        let ref = database.collection("user")
+            .document(username)
+            .collection("following")
+        ref.getDocuments { snapshot, error in
+            guard let usernames = snapshot?.documents.compactMap({ $0.documentID }), error == nil else {
+                completion([])
+                return
+            }
+            completion(usernames)
+        }
+    }
+
+    // MARK: - User Info
+
+    /// Get user info
+    /// - Parameters:
+    ///   - username: username to query for
+    ///   - completion: Result callback
+    public func getUserInfo(
+        username: String,
+        completion: @escaping (UserInfo?) -> Void
+    ) {
+        let ref = database.collection("user")
+            .document(username)
+            .collection("information")
+            .document("basic")
+        ref.getDocument { snapshot, error in
+            guard let data = snapshot?.data(),
+                  let userInfo = UserInfo(with: data) else {
+                completion(nil)
+                return
+            }
+            completion(userInfo)
+        }
+    }
+
+    /// Set user info
+    /// - Parameters:
+    ///   - userInfo: UserInfo model
+    ///   - completion: Callback
+    public func setUserInfo(
+        userInfo: UserInfo,
+        completion: @escaping (Bool) -> Void
+    ) {
+        guard let username = UserDefaults.standard.string(forKey: "username"),
+              let data = userInfo.asDictionary() else {
+            return
+        }
+
+        let ref = database.collection("user")
+            .document(username)
+            .collection("information")
+            .document("basic")
+        ref.setData(data) { error in
+            completion(error == nil)
+        }
+    }
+
+    // MARK: - Comment
+
+    /// Create a comment
+    /// - Parameters:
+    ///   - comment: Comment mmodel
+    ///   - postID: post id
+    ///   - owner: username who owns post
+    ///   - completion: Result callback
+    public func createComments(
+        comment: Comment,
+        postID: String,
+        owner: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        let newIdentifier = "\(postID)_\(comment.username)_\(Date().timeIntervalSince1970)_\(Int.random(in: 0...1000))"
+        let ref = database.collection("user")
+            .document(owner)
+            .collection("posts")
+            .document(postID)
+            .collection("comments")
+            .document(newIdentifier)
+        guard let data = comment.asDictionary() else { return }
+        ref.setData(data) { error in
+            completion(error == nil)
+        }
+    }
+
+    /// Get comments for given post
+    /// - Parameters:
+    ///   - postID: Post id to query
+    ///   - owner: Username who owns post
+    ///   - completion: Result callback
+    public func getComments(
+        postID: String,
+        owner: String,
+        completion: @escaping ([Comment]) -> Void
+    ) {
+        let ref = database.collection("user")
+            .document(owner)
+            .collection("posts")
+            .document(postID)
+            .collection("comments")
+        ref.getDocuments { snapshot, error in
+            guard let comments = snapshot?.documents.compactMap({
+                Comment(with: $0.data())
+            }),
+            error == nil else {
+                completion([])
+                return
+            }
+
+            completion(comments)
+        }
+    }
+
+    // MARK: - Liking
+
+    /// Like states that are supported
+    enum LikeState {
+        case like
+        case unlike
+    }
+
+    /// Update like state on post
+    /// - Parameters:
+    ///   - state: State to update to
+    ///   - postID: Post to update for
+    ///   - owner: Owner username of post
+    ///   - completion: Result callback
+    public func updateLikeState(
+        state: LikeState,
+        postID: String,
+        owner: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
+        let ref = database.collection("user")
+            .document(owner)
+            .collection("posts")
+            .document(postID)
+        getPost(with: postID, from: owner) { post in
+            guard var post = post else {
+                completion(false)
+                return
+            }
+
+            switch state {
+            case .like:
+                if !post.likers.contains(currentUsername) {
+                    post.likers.append(currentUsername)
+                }
+            case .unlike:
+                post.likers.removeAll(where: { $0 == currentUsername })
+            }
+
+            guard let data = post.asDictionary() else {
+                completion(false)
+                return
+            }
+            ref.setData(data) { error in
+                completion(error == nil)
+            }
         }
     }
 }
