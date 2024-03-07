@@ -21,8 +21,3 @@ This project is an Instagram Clone built with Swift and UIKit, aiming to replica
 - An Apple Developer account (optional for personal testing, required for App Store deployment)
 - CocoaPods
 
-### Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/swift-uikit-instagram-clone.git
